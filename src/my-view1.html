@@ -14,6 +14,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <!-- custom components import -->
 <link rel="import" href="./components/custom-alert.html">
+<link rel="import" href="./components/fetch-github-user.html">
 
 <dom-module id="my-view1">
   <template>
@@ -26,6 +27,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <div class="card">
+<hr>
+<fetch-github-user></fetch-github-user>
+<hr>
+
+
     <paper-input label="alert's level" value="{{alertLevel}}"></paper-input>
     <br />
     <custom-alert message="[[alertLevel]]" level="[[alertLevel]]"></custom-alert>

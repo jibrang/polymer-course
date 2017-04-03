@@ -1,0 +1,52 @@
+<!--
+  Handles an input to retrive the github's user's information and display it in TBD way.
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="fetch-github-user">
+  <template>
+    <style>
+:host {
+  display: block; 
+}
+    </style>
+
+    <iron-ajax
+            auto
+            url="https://api.github.com/users/[[user]]"
+            handle-as="json"
+            on-response="_handleResponse"
+            debounce-duration="300">
+    </iron-ajax>
+
+    <vaadin-grid items="[[users]]">
+      <table>
+        <colgroup>
+          <col name="id" resizable>
+          <col name="login" resizable>
+          <col name="name" resizable flex>
+        </colgroup>
+      </table>
+    </vaadin-grid>
+
+    <img src="[[avatar]]" />
+
+    <paper-input label="Github user :)" value="{{user}}"></paper-input>
+  </template>
+
+  <script>
+Polymer({
+  is: 'fetch-github-user',
+
+  _handleResponse: function(res) {
+    var _res = res.detail.response;
+    console.log(_res.detail);
+    this.users = [_res];
+    this.avatar = _res.avatar_url;
+  }
+});
+  </script>
+</dom-module>
