@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="shared-styles.html">
 
 <!-- custom components import -->
@@ -25,8 +26,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <div class="card">
+    <paper-input label="alert's level" value="{{alertLevel}}"></paper-input>
     <br />
-    <custom-alert></custom-alert>
+    <custom-alert message="[[alertLevel]]" level="[[alertLevel]]"></custom-alert>
+    <br />
       <div class="circle">1</div>
       <h1>View One</h1>
       <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
