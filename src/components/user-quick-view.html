@@ -1,0 +1,28 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="user-quick-view">
+  <template>
+    <style>
+:host {
+  display: block;
+  border-bottom: 1px solid black;
+  padding: 17px 30px;
+}
+    </style>
+    <strong>Name</strong> {{user.name}} <br/>
+    <strong>Last Name</strong> {{user.lastName}}
+  </template>
+  <script>
+Polymer({
+  is: 'user-quick-view',
+  properties: {
+    user: {
+      type: Object,
+      value: function() {
+       return {}; 
+      }
+    }
+  }
+});
+  </script>
+</dom-module>

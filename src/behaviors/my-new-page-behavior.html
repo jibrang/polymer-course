@@ -1,0 +1,30 @@
+<script>
+  // define the package / namespace for the object / behavior
+  var PolymerCourse = PolymerCourse || {};
+
+  // under that global name, add a specific implementation element
+  PolymerCourse.MyBehavior = {
+    /**
+     * Get all users to be shown on the page.
+     */
+    getUsers: function() {
+      console.log('getting users');
+      var usr = { id: 'somerandomid1', name: 'Lalo Eduardo', lastName: 'Montalvo Alba' };
+      var usr1 = { id: 'somerandomid2', name: 'Jibran', lastName: 'Garcia' };
+      var usr2 = { id: 'somerandomid3', name: 'Carlos', lastName: 'Martinez' };
+
+      return [usr, usr1, usr2];
+    },
+
+    _displayUserDetails: function (ev) {
+      this.selectedUser = ev.target.user;
+      // run the animation
+      this.playAnimation('display-user-details');
+      this.playAnimation('scale-down-users');
+    },
+
+    _shouldDisplay: function(su) {
+      return su !== undefined && su !== null;
+    }
+  };
+</script>

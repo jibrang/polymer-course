@@ -1,0 +1,92 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../bower_components/neon-animation/neon-animation-runner-behavior.html">
+<link rel="import" href="../bower_components/neon-animation/animations/scale-up-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/scale-down-animation.html">
+
+<!-- import the custom view -->
+<link rel="import" href="./components/user-quick-view.html">
+
+<!-- import the behavior -->
+<link rel="import" href="./behaviors/my-new-page-behavior.html">
+
+<dom-module id="my-view4">
+  <template>
+    <style>
+:host {
+  display: block;
+}
+
+paper-button {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
+    </style>
+    <h1>Hello :)</h1>
+    <paper-button 
+            on-click="_onLUClick" raised>Load Users :)</paper-button>
+
+          <br/>
+          <div id="all-users">
+            <template is="dom-repeat" 
+                      items="[[users]]" as="user">
+              <user-quick-view user="[[user]]" on-click="_displayUserDetails"></user-quick-view>
+            </template>
+          </div>
+
+          <hr/>
+          <!-- user details DIV will encapsulate the template so that we can pass this as node to the animation config -->
+          <div id="user-details">
+            <template is="dom-if" if="{{_shouldDisplay(selectedUser)}}">
+              <user-quick-view user="[[selectedUser]]"></user-quick-view>
+            </template>
+          </div>
+  </template>
+  <script>
+Polymer({
+  is: 'my-view4',
+
+  properties: {
+    // the configuration for the animation
+    animationConfig: {
+      // actual value of the animation configuration
+      value: function() {
+        return {
+          //displayUserDetails animation will contains a set of frames that constitute the animation
+          'display-user-details': [
+            {
+              name: 'fade-in-animation',
+              node: this.$$('#user-details'), // $$() this is the equivalent to == document.querySelector("") for Polymer
+              timing: { duration: 1000 }
+            },
+            {
+              name: 'scale-up-animation',
+              node: this.$$('#user-details'),
+              timing: { duration: 1000 }
+            }
+          ],
+
+          'scale-down-users': [
+            {
+              name: 'scale-down-animation',
+              node: this.$$('#all-users'),
+              timing: { duration: 1000 }
+            }
+          ]
+        }
+      }
+    }
+  },
+
+  behaviors: [
+    PolymerCourse.MyBehavior,
+    Polymer.NeonAnimationRunnerBehavior
+  ],
+  _onLUClick: function() {
+    this.users = this.getUsers();
+  }
+});
+  </script>
+</dom-module>
